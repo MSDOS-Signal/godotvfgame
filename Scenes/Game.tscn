@@ -1,0 +1,382 @@
+[gd_scene load_steps=10 format=3 uid="uid://c4jlqm3arvcoe"]
+
+[ext_resource type="Texture2D" uid="uid://dhxmhxrj4dpsk" path="res://AssetBundle/Sprites/ForestBackground.png" id="1_nn3jq"]
+[ext_resource type="Script" uid="uid://c0kdmjknpwvwe" path="res://Script/GameManager.gd" id="1_prrls"]
+[ext_resource type="PackedScene" uid="uid://4as8uxsscqdj" path="res://Scenes/player.tscn" id="2_a0rew"]
+[ext_resource type="PackedScene" uid="uid://cg21qoul2os1u" path="res://Scenes/Slime.tscn" id="3_of3be"]
+[ext_resource type="FontFile" uid="uid://dhwopts2o6mnm" path="res://AssetBundle/Uranus_Pixel_11Px.ttf" id="5_6pc7t"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_2husw"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2"]
+bg_color = Color(0.3, 0.3, 0.3, 0.9)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3"]
+bg_color = Color(0.1, 0.1, 0.1, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.6, 0.6, 0.6, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1"]
+bg_color = Color(0.2, 0.2, 0.2, 0.8)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[node name="Node2D" type="Node2D" node_paths=PackedStringArray("spawn_timer", "score_label", "game_over_label")]
+y_sort_enabled = true
+script = ExtResource("1_prrls")
+slime_scene = ExtResource("3_of3be")
+spawn_timer = NodePath("Timer")
+score_label = NodePath("CanvasLayer/Label")
+game_over_label = NodePath("CanvasLayer/GameOver")
+
+[node name="background1" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(-242.5, 0.999992)
+scale = Vector2(2.00417, 1.95714)
+texture = ExtResource("1_nn3jq")
+metadata/_edit_lock_ = true
+
+[node name="background2" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(241.25, 0.999992)
+scale = Vector2(2.02708, 1.95714)
+texture = ExtResource("1_nn3jq")
+metadata/_edit_lock_ = true
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(1.2, 1.2)
+metadata/_edit_lock_ = true
+
+[node name="Area2D" parent="." instance=ExtResource("3_of3be")]
+y_sort_enabled = true
+position = Vector2(-362, -408)
+
+[node name="Player" parent="." instance=ExtResource("2_a0rew")]
+y_sort_enabled = true
+position = Vector2(-268, 114)
+
+[node name="Boundary" type="Node2D" parent="."]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Boundary"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boundary/StaticBody2D"]
+position = Vector2(1, 263)
+shape = SubResource("WorldBoundaryShape2D_2husw")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="Boundary"]
+position = Vector2(212, 0)
+rotation = -1.58281
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boundary/StaticBody2D2"]
+position = Vector2(1, 263)
+shape = SubResource("WorldBoundaryShape2D_2husw")
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="Boundary"]
+position = Vector2(-214, 17)
+rotation = 1.56652
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boundary/StaticBody2D3"]
+position = Vector2(1, 263)
+shape = SubResource("WorldBoundaryShape2D_2husw")
+
+[node name="StaticBody2D4" type="StaticBody2D" parent="Boundary"]
+position = Vector2(90, 282)
+rotation = 3.13755
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boundary/StaticBody2D4"]
+position = Vector2(1, 263)
+shape = SubResource("WorldBoundaryShape2D_2husw")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+autostart = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="GameOver3" type="Label" parent="CanvasLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -587.0
+offset_top = -308.0
+offset_right = -251.0
+offset_bottom = -234.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0.231373, 0.576471, 0, 1)
+theme_override_constants/outline_size = 60
+theme_override_fonts/font = ExtResource("5_6pc7t")
+theme_override_font_sizes/font_size = 32
+text = "Made by Xinhao"
+horizontal_alignment = 1
+
+[node name="GameOver4" type="Label" parent="CanvasLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 165.0
+offset_top = -296.0
+offset_right = 556.0
+offset_bottom = -251.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0.231373, 0.576471, 0, 1)
+theme_override_constants/outline_size = 60
+theme_override_fonts/font = ExtResource("5_6pc7t")
+theme_override_font_sizes/font_size = 24
+text = "WASD移动或点击按钮"
+horizontal_alignment = 1
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+offset_left = 42.0
+offset_top = 81.0
+offset_right = 210.0
+offset_bottom = 130.0
+theme_override_fonts/font = ExtResource("5_6pc7t")
+theme_override_font_sizes/font_size = 48
+text = "分数:0"
+
+[node name="GameOver" type="Label" parent="CanvasLayer"]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -118.0
+offset_top = -24.5
+offset_right = 118.0
+offset_bottom = 24.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0.231373, 0.576471, 0, 1)
+theme_override_constants/outline_size = 60
+theme_override_fonts/font = ExtResource("5_6pc7t")
+theme_override_font_sizes/font_size = 120
+text = "GAME OVER"
+
+[node name="GameOver2" type="Label" parent="CanvasLayer/GameOver"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -102.0
+offset_top = 73.0
+offset_right = 94.0
+offset_bottom = 162.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0.231373, 0.576471, 0, 1)
+theme_override_constants/outline_size = 60
+theme_override_fonts/font = ExtResource("5_6pc7t")
+theme_override_font_sizes/font_size = 48
+text = "游戏结束"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="CanvasLayer"]
+offset_left = 75.0
+offset_top = 275.0
+offset_right = 484.0
+offset_bottom = 325.0
+theme_override_fonts/font = ExtResource("5_6pc7t")
+theme_override_font_sizes/font_size = 48
+text = "VF小狐狸大作战🦊"
+
+[node name="Label3" type="Label" parent="CanvasLayer"]
+offset_left = 896.0
+offset_top = 481.0
+offset_right = 1091.0
+offset_bottom = 583.0
+theme_override_fonts/font = ExtResource("5_6pc7t")
+theme_override_font_sizes/font_size = 25
+text = "作者Xinhao
+微信DXH08060927
+QQ3878919117"
+
+[node name="Label4" type="Label" parent="CanvasLayer"]
+offset_left = 32.0
+offset_top = 129.0
+offset_right = 441.0
+offset_bottom = 179.0
+theme_override_fonts/font = ExtResource("5_6pc7t")
+theme_override_font_sizes/font_size = 48
+text = "最高分数:"
+
+[node name="ButtonUp" type="Button" parent="."]
+z_index = 3
+offset_left = -390.0
+offset_top = 116.0
+offset_right = -333.0
+offset_bottom = 154.0
+theme_override_fonts/font = ExtResource("5_6pc7t")
+theme_override_font_sizes/font_size = 24
+theme_override_styles/hover = SubResource("StyleBoxFlat_2")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_3")
+theme_override_styles/normal = SubResource("StyleBoxFlat_1")
+text = "↑"
+
+[node name="ButtonDown" type="Button" parent="."]
+offset_left = -391.0
+offset_top = 210.0
+offset_right = -335.0
+offset_bottom = 247.0
+theme_override_fonts/font = ExtResource("5_6pc7t")
+theme_override_font_sizes/font_size = 24
+theme_override_styles/hover = SubResource("StyleBoxFlat_2")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_3")
+theme_override_styles/normal = SubResource("StyleBoxFlat_1")
+text = "↓"
+
+[node name="ButtonLeft" type="Button" parent="."]
+z_index = 3
+offset_left = -450.0
+offset_top = 164.0
+offset_right = -400.0
+offset_bottom = 201.0
+theme_override_fonts/font = ExtResource("5_6pc7t")
+theme_override_font_sizes/font_size = 24
+theme_override_styles/hover = SubResource("StyleBoxFlat_2")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_3")
+theme_override_styles/normal = SubResource("StyleBoxFlat_1")
+text = "←"
+
+[node name="ButtonRight" type="Button" parent="."]
+z_index = 3
+offset_left = -323.0
+offset_top = 163.0
+offset_right = -270.0
+offset_bottom = 202.0
+theme_override_fonts/font = ExtResource("5_6pc7t")
+theme_override_font_sizes/font_size = 24
+theme_override_styles/hover = SubResource("StyleBoxFlat_2")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_3")
+theme_override_styles/normal = SubResource("StyleBoxFlat_1")
+text = "→"
+
+[node name="background3" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(-242.5, 570)
+scale = Vector2(2.00417, 1.95714)
+texture = ExtResource("1_nn3jq")
+metadata/_edit_lock_ = true
+
+[node name="background4" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(241.25, 570)
+scale = Vector2(2.02708, 1.95714)
+texture = ExtResource("1_nn3jq")
+metadata/_edit_lock_ = true
+
+[node name="ButtonUp2" type="Button" parent="."]
+z_index = 3
+offset_left = -332.0
+offset_top = 616.0
+offset_right = -188.0
+offset_bottom = 655.0
+theme_override_fonts/font = ExtResource("5_6pc7t")
+theme_override_font_sizes/font_size = 35
+theme_override_styles/hover = SubResource("StyleBoxFlat_2")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_3")
+theme_override_styles/normal = SubResource("StyleBoxFlat_1")
+text = "开始游戏"
+
+[node name="Camera2D2" type="Camera2D" parent="."]
+position = Vector2(3, 569)
+ignore_rotation = false
+zoom = Vector2(1.2, 1.2)
+
+[node name="ButtonUp3" type="Button" parent="."]
+z_index = 3
+offset_left = -332.0
+offset_top = 700.0
+offset_right = -188.0
+offset_bottom = 739.0
+theme_override_fonts/font = ExtResource("5_6pc7t")
+theme_override_font_sizes/font_size = 35
+theme_override_styles/hover = SubResource("StyleBoxFlat_2")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_3")
+theme_override_styles/normal = SubResource("StyleBoxFlat_1")
+text = "退出"
+
+[node name="ButtonExitToMenu" type="Button" parent="."]
+z_index = 3
+offset_left = -200.0
+offset_top = -265.0
+offset_right = -100.0
+offset_bottom = -225.0
+theme_override_fonts/font = ExtResource("5_6pc7t")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/hover = SubResource("StyleBoxFlat_2")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_3")
+theme_override_styles/normal = SubResource("StyleBoxFlat_1")
+text = "主菜单"
+
+[node name="ButtonRestart" type="Button" parent="."]
+z_index = 3
+offset_left = 100.0
+offset_top = -265.0
+offset_right = 200.0
+offset_bottom = -225.0
+theme_override_fonts/font = ExtResource("5_6pc7t")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/hover = SubResource("StyleBoxFlat_2")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_3")
+theme_override_styles/normal = SubResource("StyleBoxFlat_1")
+text = "重新开始"
+
+[node name="ButtonResetHighScore" type="Button" parent="."]
+z_index = 3
+offset_left = 258.0
+offset_top = 779.0
+offset_right = 437.0
+offset_bottom = 819.0
+theme_override_fonts/font = ExtResource("5_6pc7t")
+theme_override_font_sizes/font_size = 35
+theme_override_styles/hover = SubResource("StyleBoxFlat_2")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_3")
+theme_override_styles/normal = SubResource("StyleBoxFlat_1")
+text = "重置最高分"
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="Timer" to="." method="spawnSlime"]
+[connection signal="button_down" from="ButtonUp" to="Player" method="_on_button_up_pressed"]
+[connection signal="button_up" from="ButtonUp" to="Player" method="_on_button_up_released"]
+[connection signal="button_down" from="ButtonDown" to="Player" method="_on_button_down_pressed"]
+[connection signal="button_up" from="ButtonDown" to="Player" method="_on_button_down_released"]
+[connection signal="button_down" from="ButtonLeft" to="Player" method="_on_button_left_pressed"]
+[connection signal="button_up" from="ButtonLeft" to="Player" method="_on_button_left_released"]
+[connection signal="button_down" from="ButtonRight" to="Player" method="_on_button_right_pressed"]
+[connection signal="button_up" from="ButtonRight" to="Player" method="_on_button_right_released"]
+[connection signal="pressed" from="ButtonUp2" to="." method="_on_start_game_button_pressed"]
+[connection signal="pressed" from="ButtonUp3" to="." method="_on_exit_button_pressed"]
+[connection signal="pressed" from="ButtonExitToMenu" to="." method="_on_exit_to_menu_button_pressed"]
+[connection signal="pressed" from="ButtonRestart" to="." method="_on_restart_button_pressed"]
+[connection signal="pressed" from="ButtonResetHighScore" to="." method="_on_reset_high_score_button_pressed"]
